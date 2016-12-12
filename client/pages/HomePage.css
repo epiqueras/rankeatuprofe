@@ -1,0 +1,22 @@
+.home-page-container {
+  height: 100vh;
+}
+
+.search-button {
+  width: 100%;
+  height: 200px;
+}
+
+.search-button > button {
+  height: 100% !important;
+}
+
+.search-button > button > div > div {
+  height: 200px !important;
+  line-height: 200px;
+}
+
+.search-button > button > div > div > span {
+  font-family: 'Concert One', cursive;
+  font-size: 40px !important;
+}
