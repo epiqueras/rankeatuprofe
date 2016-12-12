@@ -1,0 +1,23 @@
+{
+  "name": "rankeatuprofe",
+  "version": "1.0.0",
+  "description": "Rankea a tus profes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epiqueras/rankeatuprofe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/epiqueras/rankeatuprofe/issues"
+  },
+  "homepage": "https://github.com/epiqueras/rankeatuprofe#readme",
+  "devDependencies": {
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
