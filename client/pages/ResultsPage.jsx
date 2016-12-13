@@ -1,60 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
-import { List, ListItem } from 'material-ui/List';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ActionBook from 'material-ui/svg-icons/action/book';
-import SocialSchool from 'material-ui/svg-icons/social/school';
+import { List } from 'material-ui/List';
 
-// TODO:
-// Make teacher and school list items.
+import SchoolListItem from 'components/SchoolListItem';
+import TeacherListItem from 'components/TeacherListItem';
 
-export default class ResultsPage extends Component {
-  constructor() {
-    super();
-    this.state = { open: false };
-  }
+const ResultsPage = ({}, context) => { // eslint-disable-line no-empty-pattern
+  const resultsList = context.results.map((result) => {
+    if (result.school) {
+      return <TeacherListItem key={result.id} teacher={result} />;
+    } else { // eslint-disable-line no-else-return
+      return <SchoolListItem key={result.id} school={result} />;
+    }
+  });
+  return (
+    <div>
+      <Paper zDepth={4}>
+        <List>
+          <Subheader>Resultados</Subheader>
+          {resultsList}
+        </List>
+      </Paper>
+    </div>
+  );
+};
 
-  handleToggle() {
-    this.setState({
-      open: !this.state.open,
-    });
-  }
+ResultsPage.contextTypes = {
+  results: React.PropTypes.array,
+};
 
-  handleNestedListToggle(item) {
-    this.setState({
-      open: item.state.open,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <Paper zDepth={4}>
-          <List>
-            <Subheader>Resultados</Subheader>
-            <ListItem
-              primaryText="Pepe Gonzales"
-              leftIcon={<ActionBook />}
-              primaryTogglesNestedList
-              nestedItems={[
-                <ListItem
-                  key={1}
-                  primaryText="Calidad: 4/5"
-                  leftIcon={<ActionGrade />}
-                  disabled
-                />,
-                <ListItem
-                  key={3}
-                  primaryText="Colegio Rapido"
-                  leftIcon={<SocialSchool />}
-                  disabled
-                />,
-              ]}
-            />
-          </List>
-        </Paper>
-      </div>
-    );
-  }
-}
+export default ResultsPage;

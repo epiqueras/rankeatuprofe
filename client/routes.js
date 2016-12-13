@@ -10,6 +10,7 @@ import HomePage from 'pages/HomePage';
 
 import App from 'views/App';
 import ResultsPage from 'pages/ResultsPage';
+import TeacherPage from 'pages/TeacherPage';
 
 
 export default () => (
@@ -20,6 +21,7 @@ export default () => (
       </Route>
       <Route path="/busqueda" component={App}>
         <IndexRoute component={ResultsPage} />
+        <Route path="/profesor/:teacherName" component={TeacherPage} />
       </Route>
     </Route>
   </Router>
