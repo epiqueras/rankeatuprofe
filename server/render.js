@@ -13,8 +13,8 @@ export default function render(html) {
     </head>
     <body>
       <div id="app">${html}</div>
-      <script src="/vendor.js"></script>
-      <script src="/index.js"></script>
+      <script src="/dist/vendor.js"></script>
+      <script src="/dist/index.js"></script>
     </body>
   </html>
   `;

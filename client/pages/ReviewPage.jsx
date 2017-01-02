@@ -81,7 +81,6 @@ export default class TeacherPage extends Component {
       return;
     }
 
-    console.log('submitted');
     this.context.router.goBack();
   }
 

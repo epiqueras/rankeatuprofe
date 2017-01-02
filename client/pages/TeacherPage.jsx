@@ -101,6 +101,6 @@ export default class TeacherPage extends Component {
 }
 
 TeacherPage.propTypes = {
-  params: React.PropTypes.object,
+  // params: React.PropTypes.object,
   location: React.PropTypes.object,
 };

@@ -44,12 +44,8 @@ const SchoolCard = ({ school }) => {
     }],
   };
   let graph;
-  if (window === undefined) { // eslint-disable-line no-undef
-    graph = (<div />);
-  } else {
-    const { Pie } = require('react-chartjs-2'); // eslint-disable-line global-require
-    graph = (<Pie data={data} />);
-  }
+  const { Pie } = require('react-chartjs-2'); // eslint-disable-line global-require
+  graph = (<Pie data={data} />);
   const averageGrade = data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
     accumulator + (((currentIndex * 3) + 1) * currentValue)
   ), 0) / school.numberOfReviews;

@@ -3,17 +3,22 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    index: './client/index.js',
-    html: './index.html',
+    index: ['webpack-hot-middleware/client', './client/index.js'],
     vendor: ['react', 'react-dom'],
   },
 
   output: {
     filename: 'index.js',
     path: path.join(__dirname, '/dist'),
+    publicPath: '/dist/',
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.BROWSER': JSON.stringify(true)
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
@@ -42,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules(?!\/flexboxgrid)/
+        exclude: /node_modules(?!\/flexboxgrid)/,
         loader: 'style-loader!css-loader',
       },
       {
