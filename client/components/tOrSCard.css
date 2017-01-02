@@ -1,14 +1,15 @@
-.teacher-background {
+.card-background {
   padding: 15px;
+  background-color: #202020 !important;
 }
 
-.teacher-rating label {
+.card-rating label {
   font-size: 50px;
 }
 
 .name-and-school {
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .attendance-and-retake {

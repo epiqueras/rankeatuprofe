@@ -12,6 +12,7 @@ module.exports = {
     filename: 'index.js',
     path: path.join(__dirname, '/dist'),
   },
+
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -21,9 +22,13 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
-    root: path.resolve('./client'),
+    extensions: ['', '.js', '.jsx'],
+    modules: [
+      'client',
+      'node_modules',
+    ],
   },
+
   module: {
     loaders: [
       {
@@ -37,6 +42,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        exclude: /node_modules(?!\/flexboxgrid)/
         loader: 'style-loader!css-loader',
       },
       {

@@ -1,3 +1,8 @@
 html, body {
   background: rgb(48, 48, 48);
+  font-family: 'Roboto Condensed', sans-serif !important;
+}
+
+div, label {
+  font-family: 'Roboto Condensed', sans-serif !important;
 }

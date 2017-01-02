@@ -4,7 +4,7 @@
   "description": "Rankea a tus profes",
   "main": "index.js",
   "scripts": {
-    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --history-api-fallback",
+    "dev": "BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/epiqueras/rankeatuprofe#readme",
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
+    "babel-plugin-webpack-loaders": "^0.8.0",
+    "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.26.1",
@@ -38,6 +41,7 @@
   },
   "dependencies": {
     "chart.js": "^2.4.0",
+    "express": "^4.14.0",
     "flexboxgrid": "^6.3.1",
     "material-ui": "^0.16.5",
     "react": "^15.4.1",

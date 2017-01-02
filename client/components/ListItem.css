@@ -1,3 +1,21 @@
 .indent-item > div {
   margin-left: 20px;
 }
+
+.groove-border {
+  border-style: groove;
+  border-width: 1px;
+  padding: 2%;
+}
+
+.review-stats {
+  font-size: 15px;
+}
+
+.yes-or-no {
+  margin-top: -4px;
+}
+
+.review-rating label {
+  font-size: 30px;
+}

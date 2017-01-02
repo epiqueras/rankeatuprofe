@@ -2,21 +2,20 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import StarRatingComponent from 'react-star-rating-component';
-import { Pie } from 'react-chartjs-2';
 import ActionBook from 'material-ui/svg-icons/action/book';
 import SocialSchool from 'material-ui/svg-icons/social/school';
 
-import 'components/TeacherCard.css';
+import './tOrSCard.css';
 
 const TeacherCard = ({ teacher }) => {
   const attendanceString = teacher.takesAttendance < (teacher.numberOfReviews / 2) ?
-      `${teacher.numberOfReviews - teacher.takesAttendance} dijeron que no`
+      `${teacher.numberOfReviews - teacher.takesAttendance}/${teacher.numberOfReviews} dijeron que no`
     :
-      `${teacher.takesAttendance} dijeron que si`;
+      `${teacher.takesAttendance}/${teacher.numberOfReviews} dijeron que si`;
   const wouldTakeAgainString = teacher.wouldTakeAgain < (teacher.wouldTakeAgain / 2) ?
-    `${teacher.numberOfReviews - teacher.wouldTakeAgain} dijeron que no`
+    `${teacher.numberOfReviews - teacher.wouldTakeAgain}/${teacher.numberOfReviews} dijeron que no`
   :
-    `${teacher.wouldTakeAgain} dijeron que si`;
+    `${teacher.wouldTakeAgain}/${teacher.numberOfReviews} dijeron que si`;
   const data = {
     labels: [
       '0-2',
@@ -46,30 +45,33 @@ const TeacherCard = ({ teacher }) => {
         '#2AAF63',
         '#00BF5D',
       ],
-      hoverBackgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56',
-      ],
+      borderWidth: 1,
     }],
   };
+  let graph;
+  if (window === undefined) { // eslint-disable-line no-undef
+    graph = (<div />);
+  } else {
+    const { Pie } = require('react-chartjs-2'); // eslint-disable-line global-require
+    graph = (<Pie data={data} />);
+  }
   const averageGrade = data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
     accumulator + (((currentIndex * 3) + 1) * currentValue)
   ), 0) / teacher.numberOfReviews;
   return (
     <div className="row">
       <div className="col-xs-12">
-        <Paper zDepth={5} className="teacher-background">
+        <Paper zDepth={5} className="card-background">
           <div className="row center-xs middle-xs">
             <div className="col-xs-12 name-and-school">
               <div className="row center-xs">
                 <div className="col-xs-12 col-sm-3">
-                  <span><ActionBook /><strong>Nombre:</strong> {teacher.name}</span>
+                  <span><ActionBook /><strong>{teacher.name}</strong></span>
                 </div>
                 <br />
                 <br />
                 <div className="col-xs-12 col-sm-3">
-                  <span><SocialSchool /><strong>Colegio:</strong> {teacher.school}</span>
+                  <span><SocialSchool /><strong>{teacher.schoolName}</strong></span>
                 </div>
               </div>
             </div>
@@ -83,7 +85,7 @@ const TeacherCard = ({ teacher }) => {
                 editing={false}
                 starCount={5}
                 value={teacher.rating}
-                className="teacher-rating"
+                className="card-rating"
               />
               <h6>Promedio: {teacher.rating}</h6>
             </div>
@@ -92,10 +94,10 @@ const TeacherCard = ({ teacher }) => {
             </div>
             <div className="col-xs-12 col-sm-6 col-md-5">
               <h3>Distribucion de notas: {teacher.numberOfReviews}</h3>
-              <Pie data={data} />
+              {graph}
               <h6>Promedio: {averageGrade}</h6>
             </div>
-            <div className="col-xs-12 col-sm-0">
+            <div className="col-xs-12">
               <Divider />
             </div>
             <div className="col-xs-12 attendance-and-retake">
@@ -106,7 +108,9 @@ const TeacherCard = ({ teacher }) => {
                 <br />
                 <br />
                 <div className="col-xs-12 col-sm-3">
-                  <span><strong>Lo tomaria de nuevo:</strong> {wouldTakeAgainString}</span>
+                  <span>
+                    <strong>&quot;Lo tomaria de nuevo&quot;:</strong> {wouldTakeAgainString}
+                  </span>
                 </div>
               </div>
             </div>
