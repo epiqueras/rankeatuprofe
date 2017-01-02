@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import StarRatingComponent from 'react-star-rating-component';
 import SocialSchool from 'material-ui/svg-icons/social/school';
+import { Pie } from 'react-chartjs-2';
 
 import './tOrSCard.css';
 
@@ -43,9 +44,7 @@ const SchoolCard = ({ school }) => {
       borderWidth: 1,
     }],
   };
-  let graph;
-  const { Pie } = require('react-chartjs-2'); // eslint-disable-line global-require
-  graph = (<Pie data={data} />);
+  const graph = (<Pie data={data} />);
   const averageGrade = data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
     accumulator + (((currentIndex * 3) + 1) * currentValue)
   ), 0) / school.numberOfReviews;

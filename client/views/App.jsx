@@ -82,6 +82,7 @@ export default class App extends Component {
           </div>
           <div className="col-xs-11" style={{ marginTop: -20 }}>
             <AutoComplete
+              id="search-bar"
               floatingLabelText="Busca..."
               filter={AutoComplete.fuzzyFilter}
               dataSource={this.state.suggestions}

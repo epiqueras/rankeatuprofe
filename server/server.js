@@ -33,7 +33,6 @@ if (process.env.NODE_ENV === 'development') {
 
 app.get('*', (req, res) => {
   match({ routes: routes(), location: req.url }, (err, redirectLocation, renderProps) => {
-    console.log('request made');
     if (err) {
       return res.status(500).send(err.message);
     }

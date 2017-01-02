@@ -120,6 +120,7 @@ export default class TeacherPage extends Component {
           <div className="row">
             <div className="col-xs-12">
               <TextField
+                id="name-input"
                 value={this.state.name}
                 errorText={this.state.nameError}
                 onChange={this.onNameChange}
@@ -131,6 +132,7 @@ export default class TeacherPage extends Component {
           <div className="row">
             <div className="col-xs-12">
               <SelectField
+                id="grade-input"
                 value={this.state.grade}
                 onChange={this.onGradeChange}
                 floatingLabelText="Nota recibida"
