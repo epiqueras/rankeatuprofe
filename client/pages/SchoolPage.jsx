@@ -14,8 +14,6 @@ import apiCaller from '../utils/apiCaller';
 import SchoolCard from '../components/SchoolCard';
 import TeacherListItem from '../components/TeacherListItem';
 
-// TODO: start connecting client to server.
-
 export default class SchoolPage extends Component {
   constructor(props, context) {
     super(props, context);

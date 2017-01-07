@@ -19,7 +19,7 @@ export default () => (
     <Route path="/" component={Home}>
       <IndexRoute component={HomePage} />
     </Route>
-    <Route path="/busqueda" component={App}>
+    <Route path="/busqueda/:type" component={App}>
       <IndexRoute component={ResultsPage} />
       <Route path="/profesor/:slug" component={TeacherPage} />
       <Route path="/profesor/:slug/review" component={ReviewPage} />

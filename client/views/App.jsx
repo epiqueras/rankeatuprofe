@@ -10,6 +10,8 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 
+import { goBack } from '../utils/goBack';
+
 export default class App extends Component {
   constructor() {
     super();
@@ -52,7 +54,6 @@ export default class App extends Component {
       ],
     };
     this.search = this.search.bind(this);
-    this.goBack = this.goBack.bind(this);
   }
 
   getChildContext() {
@@ -71,17 +72,13 @@ export default class App extends Component {
     return null;
   }
 
-  goBack() {
-    this.context.router.goBack();
-  }
-
   render() {
     return (
       <div>
         <div className="row middle-xs center-xs">
           <div className="col-xs-1">
             <IconButton
-              onTouchTap={this.goBack}
+              onTouchTap={goBack}
               tooltip="Regresar"
               touch tooltipPosition="bottom-right"
             >
@@ -102,7 +99,7 @@ export default class App extends Component {
         </div>
         {this.props.children}
         <Alert
-          stack={{ limit: 2 }}
+          stack={{ limit: 1 }}
           effect="bouncyflip"
         />
       </div>

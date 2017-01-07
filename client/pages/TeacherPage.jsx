@@ -1,4 +1,3 @@
-/* global window */
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -8,6 +7,7 @@ import { List } from 'material-ui/List';
 import { Link } from 'react-router';
 
 import apiCaller from '../utils/apiCaller';
+import { go } from '../utils/goBack';
 
 import TeacherCard from '../components/TeacherCard';
 import ReviewListItem from '../components/ReviewListItem';
@@ -45,7 +45,7 @@ export default class TeacherPage extends Component {
                 <Subheader>Reviews: </Subheader>
               </div>
               <div className="col-xs-6">
-                <Link to={`${this.props.location.pathname}/review`}>
+                <Link onTouchTap={go} to={`${this.props.location.pathname}/review`}>
                   <RaisedButton
                     label="Comenta"
                     labelPosition="before"

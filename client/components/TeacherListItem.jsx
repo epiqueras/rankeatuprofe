@@ -7,6 +7,8 @@ import SocialSchool from 'material-ui/svg-icons/social/school';
 
 import './ListItem.css';
 
+import { go } from '../utils/goBack';
+
 const TeacherListItem = ({ teacher, inSchoolList }) => (
   <ListItem
     primaryText={teacher.name}
@@ -14,13 +16,13 @@ const TeacherListItem = ({ teacher, inSchoolList }) => (
     primaryTogglesNestedList
     nestedItems={!inSchoolList ?
     [
-      <Link key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
+      <Link onTouchTap={go} key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
         <ListItem
           primaryText={`Reviews: ${teacher.rating}/5`}
           leftIcon={<ActionGrade />}
         />
       </Link>,
-      <Link key={2} to={`/escuela/${teacher.schoolSlug}`} className="indent-item">
+      <Link onTouchTap={go} key={2} to={`/escuela/${teacher.schoolSlug}`} className="indent-item">
         <ListItem
           primaryText={teacher.school}
           leftIcon={<SocialSchool />}
@@ -29,7 +31,7 @@ const TeacherListItem = ({ teacher, inSchoolList }) => (
     ]
     :
     [
-      <Link key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
+      <Link onTouchTap={go} key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
         <ListItem
           primaryText={`Reviews: ${teacher.rating}/5`}
           leftIcon={<ActionGrade />}

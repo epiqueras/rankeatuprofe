@@ -10,6 +10,7 @@ import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import TextField from 'material-ui/TextField';
 
 import apiCaller from '../utils/apiCaller';
+import { madeReview } from '../utils/goBack';
 
 export default class TeacherPage extends Component {
   constructor(props) {
@@ -102,7 +103,7 @@ export default class TeacherPage extends Component {
       if (res.error) {
         return null;
       }
-      return this.context.router.goBack();
+      return madeReview(this.props.params.slug);
     });
   }
 

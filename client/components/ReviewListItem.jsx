@@ -9,6 +9,8 @@ import DoNotDisturbAlt from 'material-ui/svg-icons/notification/do-not-disturb-a
 
 import './ListItem.css';
 
+import mapGradeToNumber from '../utils/mapGradeToNumber';
+
 const ReviewListItem = ({ review }) => (
   <ListItem disabled>
     <Paper zDepth={3} className="row center-xs">
@@ -34,7 +36,7 @@ const ReviewListItem = ({ review }) => (
             </div>
             <br />
             <div className="row center-xs">
-              <em>Nota Recibida:</em>&nbsp;<strong>{review.gradeReceived}/20</strong>
+              <em>Nota Recibida:</em>&nbsp;<strong>{mapGradeToNumber[review.grade]}/20</strong>
             </div>
             <br />
             <div className="row center-xs">

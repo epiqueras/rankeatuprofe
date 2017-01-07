@@ -2,6 +2,8 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 
+import { go } from '../utils/goBack';
+
 import './HomePage.css';
 
 export default () => (
@@ -9,7 +11,7 @@ export default () => (
     <div className="col-xs-10">
       <div className="row">
         <div className="col-xs-12">
-          <Link to={{ pathname: '/busqueda', query: { tipo: 'profesores' } }}>
+          <Link onTouchTap={go} to="/busqueda/profesores">
             <RaisedButton className="search-button" label="Busca Un Profesor" primary />
           </Link>
         </div>
@@ -18,7 +20,7 @@ export default () => (
       <br />
       <div className="row">
         <div className="col-xs-12">
-          <Link to={{ pathname: '/busqueda', query: { tipo: 'escuelas' } }}>
+          <Link onTouchTap={go} to="/busqueda/profesores">
             <RaisedButton className="search-button" label="Busca Una Escuela" secondary />
           </Link>
         </div>

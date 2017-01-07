@@ -6,13 +6,15 @@ import ActionBook from 'material-ui/svg-icons/action/book';
 
 import './ListItem.css';
 
+import { go } from '../utils/goBack';
+
 const SchoolListItem = ({ school }) => (
   <ListItem
     primaryText={school.name}
     leftIcon={<SocialSchool />}
     primaryTogglesNestedList
     nestedItems={[
-      <Link key={1} to={`/escuela/${school.slug}`} className="indent-item">
+      <Link onTouchTap={go} key={1} to={`/escuela/${school.slug}`} className="indent-item">
         <ListItem
           key={1}
           primaryText={'Profesores'}
