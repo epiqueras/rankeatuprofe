@@ -14,7 +14,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        exclude: /node_modules(?!\/flexboxgrid)/,
+        exclude: /node_modules(?!\/flexboxgrid)(?!\/react-s-alert)/,
         loader: 'style-loader!css-loader',
       },
     ],

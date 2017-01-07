@@ -8,7 +8,7 @@ import { Pie } from 'react-chartjs-2';
 import './tOrSCard.css';
 
 const SchoolCard = ({ school }) => {
-  const wouldTakeAgainString = school.wouldTakeAgain < (school.wouldTakeAgain / 2) ?
+  const wouldTakeAgainString = school.wouldTakeAgain < (school.numberOfReviews / 2) ?
     `${school.numberOfReviews - school.wouldTakeAgain}/${school.numberOfReviews} dijeron que no`
   :
     `${school.wouldTakeAgain}/${school.numberOfReviews} dijeron que si`;
@@ -65,7 +65,7 @@ const SchoolCard = ({ school }) => {
                 name="ranking"
                 editing={false}
                 starCount={5}
-                value={school.averageRating}
+                value={school.rating}
                 className="card-rating"
               />
               <h6>Promedio: {school.averageRating}</h6>

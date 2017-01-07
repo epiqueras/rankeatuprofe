@@ -17,7 +17,7 @@ const ReviewListItem = ({ review }) => (
           <div className="col-xs-6"><ActionFace /><strong><em>{review.name}</em></strong></div>
           <div className="col-xs-6">
             <ActionEvent />
-            <strong><em>{review.createdAt.toDateString()}</em></strong>
+            <strong><em>{(new Date(review.createdAt)).toLocaleDateString()}</em></strong>
           </div>
         </div>
         <div className="row">
@@ -29,6 +29,7 @@ const ReviewListItem = ({ review }) => (
                 starCount={5}
                 value={review.rating}
                 className="review-rating"
+                emptyStarColor={'#232323'}
               />
             </div>
             <br />

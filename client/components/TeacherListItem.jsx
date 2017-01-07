@@ -14,13 +14,13 @@ const TeacherListItem = ({ teacher, inSchoolList }) => (
     primaryTogglesNestedList
     nestedItems={!inSchoolList ?
     [
-      <Link key={1} to={`/profesor/${teacher.url}`} className="indent-item">
+      <Link key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
         <ListItem
           primaryText={`Reviews: ${teacher.rating}/5`}
           leftIcon={<ActionGrade />}
         />
       </Link>,
-      <Link key={2} to={`/escuela/${teacher.schoolUrl}`} className="indent-item">
+      <Link key={2} to={`/escuela/${teacher.schoolSlug}`} className="indent-item">
         <ListItem
           primaryText={teacher.school}
           leftIcon={<SocialSchool />}
@@ -29,7 +29,7 @@ const TeacherListItem = ({ teacher, inSchoolList }) => (
     ]
     :
     [
-      <Link key={1} to={`/profesor/${teacher.url}`} className="indent-item">
+      <Link key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
         <ListItem
           primaryText={`Reviews: ${teacher.rating}/5`}
           leftIcon={<ActionGrade />}

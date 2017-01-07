@@ -22,3 +22,9 @@
     display: none;
   }
 }
+
+@media (max-width: 300px) {
+  .card-rating label {
+    font-size: 35px;
+  }
+}

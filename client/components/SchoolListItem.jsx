@@ -12,7 +12,7 @@ const SchoolListItem = ({ school }) => (
     leftIcon={<SocialSchool />}
     primaryTogglesNestedList
     nestedItems={[
-      <Link key={1} to={`/escuela/${school.url}`} className="indent-item">
+      <Link key={1} to={`/escuela/${school.slug}`} className="indent-item">
         <ListItem
           key={1}
           primaryText={'Profesores'}

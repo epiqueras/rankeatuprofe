@@ -3,8 +3,6 @@ import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import ThemeProvider from './ThemeProvider';
-
 import Home from './views/Home';
 import HomePage from './pages/HomePage';
 
@@ -18,16 +16,14 @@ injectTapEventPlugin();
 
 export default () => (
   <Router history={browserHistory}>
-    <Route component={ThemeProvider}>
-      <Route path="/" component={Home}>
-        <IndexRoute component={HomePage} />
-      </Route>
-      <Route path="/busqueda" component={App}>
-        <IndexRoute component={ResultsPage} />
-        <Route path="/profesor/:teacherUrl" component={TeacherPage} />
-        <Route path="/profesor/:teacherUrl/review" component={ReviewPage} />
-        <Route path="/escuela/:schoolUrl" component={SchoolPage} />
-      </Route>
+    <Route path="/" component={Home}>
+      <IndexRoute component={HomePage} />
+    </Route>
+    <Route path="/busqueda" component={App}>
+      <IndexRoute component={ResultsPage} />
+      <Route path="/profesor/:slug" component={TeacherPage} />
+      <Route path="/profesor/:slug/review" component={ReviewPage} />
+      <Route path="/escuela/:slug" component={SchoolPage} />
     </Route>
   </Router>
 );

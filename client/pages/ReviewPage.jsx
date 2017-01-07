@@ -9,6 +9,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import TextField from 'material-ui/TextField';
 
+import apiCaller from '../utils/apiCaller';
+
 export default class TeacherPage extends Component {
   constructor(props) {
     super(props);
@@ -20,13 +22,14 @@ export default class TeacherPage extends Component {
       gradeError: null,
       takesAttendance: false,
       wouldTakeAgain: false,
-      message: 'Escribe un comentario....',
+      comment: 'Escribe un comentario....',
+      commentError: null,
     };
     this.onStarClick = this.onStarClick.bind(this);
     this.onGradeChange = this.onGradeChange.bind(this);
     this.onTakesAttendanceToggle = this.onTakesAttendanceToggle.bind(this);
     this.onWouldTakeAgainToggle = this.onWouldTakeAgainToggle.bind(this);
-    this.onMessageChange = this.onMessageChange.bind(this);
+    this.onCommentChange = this.onCommentChange.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
   }
@@ -47,8 +50,8 @@ export default class TeacherPage extends Component {
     this.setState({ wouldTakeAgain: toggled });
   }
 
-  onMessageChange(event) {
-    this.setState({ message: event.target.value });
+  onCommentChange(event) {
+    this.setState({ comment: event.target.value });
   }
 
   onNameChange(event, newValue) {
@@ -76,12 +79,31 @@ export default class TeacherPage extends Component {
     } else {
       this.setState({ gradeError: null });
     }
-
-    if (formIncomplete) {
-      return;
+    if (this.state.comment === 'Escribe un comentario....') {
+      this.setState({ commentError: 'Por favor ingresa un comentario.' });
+      formIncomplete = true;
+    } else {
+      this.setState({ commentError: null });
     }
 
-    this.context.router.goBack();
+    if (formIncomplete) {
+      return null;
+    }
+    return apiCaller(`/profesor/${this.props.params.slug}/review`, 'post', {
+      post: {
+        name: this.state.name,
+        comment: this.state.comment,
+        rating: this.state.rating,
+        grade: this.state.grade,
+        takesAttendance: this.state.takesAttendance,
+        wouldTakeAgain: this.state.wouldTakeAgain,
+      },
+    }).then((res) => {
+      if (res.error) {
+        return null;
+      }
+      return this.context.router.goBack();
+    });
   }
 
   render() {
@@ -101,7 +123,7 @@ export default class TeacherPage extends Component {
         <Paper zDepth={4} className="col-xs-12" style={{ background: '#202020' }}>
           <Subheader style={{ fontSize: '20px' }}>Deja tu review</Subheader>
           <div className="row">
-            <div className="col-xs-12">Profesor: {this.props.params.teacherUrl}</div>
+            <div className="col-xs-12">Profesor: {this.props.params.slug}</div>
           </div>
           <div className="row">
             <div className="col-xs-12">
@@ -167,11 +189,14 @@ export default class TeacherPage extends Component {
           </div>
           <br />
           <div className="row center-xs">
+            <div className="col-xs-12" style={{ color: '#F44336', marginBottom: '5px' }}>
+              {this.state.commentError}
+            </div>
             <div className="col-xs-11">
               <textarea
                 rows="8"
-                value={this.state.message}
-                onChange={this.onMessageChange}
+                value={this.state.comment}
+                onChange={this.onCommentChange}
                 style={{ background: 'gray', color: 'white', fontSize: '12px', width: '100%' }}
               />
             </div>
@@ -184,7 +209,7 @@ export default class TeacherPage extends Component {
                 labelPosition="before"
                 primary
                 icon={<NoteAdd />}
-                onClick={this.submitForm}
+                onTouchTap={this.submitForm}
               />
             </div>
           </div>

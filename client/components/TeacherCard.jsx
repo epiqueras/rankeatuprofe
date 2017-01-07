@@ -13,7 +13,7 @@ const TeacherCard = ({ teacher }) => {
       `${teacher.numberOfReviews - teacher.takesAttendance}/${teacher.numberOfReviews} dijeron que no`
     :
       `${teacher.takesAttendance}/${teacher.numberOfReviews} dijeron que si`;
-  const wouldTakeAgainString = teacher.wouldTakeAgain < (teacher.wouldTakeAgain / 2) ?
+  const wouldTakeAgainString = teacher.wouldTakeAgain < (teacher.numberOfReviews / 2) ?
     `${teacher.numberOfReviews - teacher.wouldTakeAgain}/${teacher.numberOfReviews} dijeron que no`
   :
     `${teacher.wouldTakeAgain}/${teacher.numberOfReviews} dijeron que si`;

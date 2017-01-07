@@ -15,7 +15,10 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.BROWSER': JSON.stringify(true)
+      'process.env': {
+        'BROWSER': JSON.stringify(true),
+        'NODE_ENV': JSON.stringify('development'),
+      }
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -47,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules(?!\/flexboxgrid)/,
+        exclude: /node_modules(?!\/flexboxgrid)(?!\/react-s-alert)/,
         loader: 'style-loader!css-loader',
       },
       {
