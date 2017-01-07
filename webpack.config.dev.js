@@ -1,33 +1,20 @@
 const webpack = require('webpack');
 const path = require('path');
+var cssnext = require('postcss-cssnext');
+var postcssFocus = require('postcss-focus');
+var postcssReporter = require('postcss-reporter');
 
 module.exports = {
   entry: {
-    index: ['webpack-hot-middleware/client', './client/index.js'],
+    app: ['webpack-hot-middleware/client', './client/index.js'],
     vendor: ['react', 'react-dom'],
   },
 
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.join(__dirname, '/dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
   },
-
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'BROWSER': JSON.stringify(true),
-        'NODE_ENV': JSON.stringify('development'),
-      }
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-      filename: 'vendor.js',
-    }),
-  ],
 
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -45,10 +32,6 @@ module.exports = {
         loaders: ['react-hot', 'babel-loader'],
       },
       {
-        test: /\.html$/,
-        loader: 'file?name=[name].[ext]',
-      },
-      {
         test: /\.css$/,
         exclude: /node_modules(?!\/flexboxgrid)(?!\/react-s-alert)/,
         loader: 'style-loader!css-loader',
@@ -61,6 +44,22 @@ module.exports = {
       },
     ],
   },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'BROWSER': JSON.stringify(true),
+        'NODE_ENV': JSON.stringify('development'),
+      }
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.js',
+    }),
+  ],
 
   eslint: {
     configFile: './.eslintrc',
