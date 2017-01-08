@@ -10,6 +10,10 @@ div, label {
   font-family: 'Roboto Condensed', sans-serif !important;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 @media (max-width: 490px) {
   .back-arrow {
     left: -10px;
