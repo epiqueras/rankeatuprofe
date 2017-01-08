@@ -1,17 +1,19 @@
+import Helmet from 'react-helmet';
+
 export default function render(html, data) {
+  const head = Helmet.rewind();
   const assetsManifest = process.env.webpackAssets &&
     JSON.parse(process.env.webpackAssets);
   const chunkManifest = process.env.webpackChunkAssets &&
     JSON.parse(process.env.webpackChunkAssets);
   return `
     <!DOCTYPE html>
-    <html>
+    <html ${head.htmlAttributes.toString()}>
       <head>
-        <title>RankeaTuProfe</title>
-        <meta charset="utf-8">
+        ${head.title.toString()}
+        ${head.meta.toString()}
+        ${head.link.toString()}
         ${process.env.NODE_ENV === 'production' ? `<link rel="stylesheet" href="${assetsManifest['/app.css']}" />` : ''}
-        <link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i" rel="stylesheet">
       </head>
       <body>
         <div id="app">${html}</div>

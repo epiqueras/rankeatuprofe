@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 import { List } from 'material-ui/List';
+import Helmet from 'react-helmet';
 
 import SchoolListItem from '../components/SchoolListItem';
 import TeacherListItem from '../components/TeacherListItem';
@@ -16,6 +17,7 @@ const ResultsPage = ({}, context) => { // eslint-disable-line no-empty-pattern
   });
   return (
     <div>
+      <Helmet title="Busqueda" />
       <Paper zDepth={4}>
         <List>
           <Subheader>Resultados:</Subheader>

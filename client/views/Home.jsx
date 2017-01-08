@@ -1,7 +1,9 @@
 import React from 'react';
+import RootHelmet from './RootHelmet';
 
 const Home = ({ children }) => (
   <div>
+    <RootHelmet />
     {children}
   </div>
 );

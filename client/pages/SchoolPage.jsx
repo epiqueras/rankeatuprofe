@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import TextField from 'material-ui/TextField';
+import Helmet from 'react-helmet';
 
 import apiCaller from '../utils/apiCaller';
 
@@ -100,47 +101,46 @@ export default class SchoolPage extends Component {
     ));
     return (
       <div>
-        <div>
-          <SchoolCard school={this.state.school} />
-          <Paper zDepth={4}>
-            <List style={{ marginTop: 25 }}>
-              <div className="row">
-                <div className="col-xs-6">
-                  <Subheader>Profesores: </Subheader>
-                </div>
-                <div className="col-xs-6">
-                  <RaisedButton
-                    label="Agregar"
-                    labelPosition="before"
-                    primary
-                    icon={<PersonAdd />}
-                    style={{ float: 'right', marginRight: '10px', marginTop: '5px' }}
-                    onTouchTap={this.handleAddFormOpen}
-                  />
-                  <Dialog
-                    title="Agregue un profesor"
-                    actions={addFormActions}
-                    open={this.state.addFormOpen}
-                    onRequestClose={this.handleAddFormClose}
-                  >
-                    <TextField
-                      id="name-input"
-                      value={this.state.addName}
-                      errorText={this.state.addNameError}
-                      onChange={this.onAddNameChange}
-                      floatingLabelText="Nombre del profesor"
-                    />
-                  </Dialog>
-                </div>
+        <Helmet title={this.state.school.name} />
+        <SchoolCard school={this.state.school} />
+        <Paper zDepth={4}>
+          <List style={{ marginTop: 25 }}>
+            <div className="row">
+              <div className="col-xs-6">
+                <Subheader>Profesores: </Subheader>
               </div>
-              {teachersList.length === 0 ?
-                <Subheader style={{ textAlign: 'center' }}>Todavia no hay profesores para esta escuela. Agregalos!</Subheader>
-              :
-                teachersList
-              }
-            </List>
-          </Paper>
-        </div>
+              <div className="col-xs-6">
+                <RaisedButton
+                  label="Agregar"
+                  labelPosition="before"
+                  primary
+                  icon={<PersonAdd />}
+                  style={{ float: 'right', marginRight: '10px', marginTop: '5px' }}
+                  onTouchTap={this.handleAddFormOpen}
+                />
+                <Dialog
+                  title="Agregue un profesor"
+                  actions={addFormActions}
+                  open={this.state.addFormOpen}
+                  onRequestClose={this.handleAddFormClose}
+                >
+                  <TextField
+                    id="name-input"
+                    value={this.state.addName}
+                    errorText={this.state.addNameError}
+                    onChange={this.onAddNameChange}
+                    floatingLabelText="Nombre del profesor"
+                  />
+                </Dialog>
+              </div>
+            </div>
+            {teachersList.length === 0 ?
+              <Subheader style={{ textAlign: 'center' }}>Todavia no hay profesores para esta escuela. Agregalos!</Subheader>
+            :
+              teachersList
+            }
+          </List>
+        </Paper>
       </div>
     );
   }

@@ -5,6 +5,7 @@ import BorderColor from 'material-ui/svg-icons/editor/border-color';
 import Subheader from 'material-ui/Subheader';
 import { List } from 'material-ui/List';
 import { Link } from 'react-router';
+import Helmet from 'react-helmet';
 
 import apiCaller from '../utils/apiCaller';
 import { go } from '../utils/goBack';
@@ -44,6 +45,7 @@ export default class TeacherPage extends Component {
     ));
     return (
       <div>
+        <Helmet title={this.state.teacher.name} />
         <TeacherCard teacher={this.state.teacher} />
         <Paper zDepth={4}>
           <List style={{ marginTop: 25 }}>

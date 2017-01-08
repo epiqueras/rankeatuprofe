@@ -28,10 +28,10 @@ import schools from './routes/schools.routes';
 import teachers from './routes/teachers.routes';
 import reviews from './routes/reviews.routes';
 
-// Webpack config
+// Webpack dev config
 import webpackDevConfig from '../webpack.config.dev';
 
-// Render function and routes
+// Render functions and client routes
 import render from './render.js';
 import routes from '../client/routes';
 import ssrFetchData from './ssrFetchData';

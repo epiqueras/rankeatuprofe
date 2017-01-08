@@ -10,6 +10,7 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 
+import RootHelmet from './RootHelmet';
 import apiCaller from '../utils/apiCaller';
 import { go, goBack, goBackReview } from '../utils/goBack';
 
@@ -52,7 +53,9 @@ export default class App extends Component {
         this.setState({ results: res.results })
       ));
     }
-    const chosenSuggestion = this.state.suggestions[index];
+    const chosenSuggestion = this.state.suggestions.find(suggestion => (
+      suggestion.name === string.text
+    ));
     go();
     if (chosenSuggestion.schoolId) {
       return this.context.router.push(`/profesor/${chosenSuggestion.slug}`);
@@ -86,6 +89,7 @@ export default class App extends Component {
     ));
     return (
       <div>
+        <RootHelmet />
         <div className="row middle-xs center-xs">
           <div className="col-xs-1">
             <IconButton
