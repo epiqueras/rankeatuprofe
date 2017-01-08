@@ -12,8 +12,7 @@
     "clean": "rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-data:clean": "node scripts/cleanDevData.js",
-    "prod-data:add": "node scripts/addProdData.js",
-    "heroku-postbuild": "npm run build && npm run build:server"
+    "prod-data:add": "node scripts/addProdData.js"
   },
   "repository": {
     "type": "git",
