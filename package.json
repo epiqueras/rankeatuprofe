@@ -8,11 +8,13 @@
     "start:prod": "NODE_ENV=production node index.js",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:server": "NODE_ENV=production webpack --config webpack.config.server.js",
-    "bs": "npm run clean && npm run build && npm run build:server && npm run start:prod",
+    "build:both": "npm run clean && npm run build && npm run build:server",
+    "bs": "npm run build:both && npm run start:prod",
     "clean": "rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-data:clean": "node scripts/cleanDevData.js",
-    "prod-data:add": "node scripts/addProdData.js"
+    "prod-data:add": "node scripts/addProdData.js",
+    "deploy": "git checkout dist && git merge master && npm run build:both && git push heroku master && git checkout master",
   },
   "repository": {
     "type": "git",
