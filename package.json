@@ -14,7 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-data:clean": "node scripts/cleanDevData.js",
     "prod-data:add": "node scripts/addProdData.js",
-    "deploy": "git checkout dist && git merge master && npm run build:both && git add . && git commit -m 'built for production' && git push heroku master && git checkout master"
+    "deploy": "git checkout dist && git merge master -m 'updates' && npm run build:both && git add . && git commit -m 'built for production' && git push heroku master && git checkout master"
   },
   "repository": {
     "type": "git",
