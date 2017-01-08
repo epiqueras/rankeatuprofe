@@ -2,8 +2,16 @@ html, body {
   background: rgb(48, 48, 48);
   font-family: 'Roboto Condensed', sans-serif !important;
   text-decoration: none !important;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 div, label {
   font-family: 'Roboto Condensed', sans-serif !important;
+}
+
+@media (max-width: 490px) {
+  .back-arrow {
+    left: -10px;
+  }
 }

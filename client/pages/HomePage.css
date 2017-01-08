@@ -20,3 +20,15 @@
   font-family: 'Concert One', cursive;
   font-size: 40px !important;
 }
+
+@media (max-width: 490px) {
+  .search-button > button > div > div > span {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 275px) {
+  .search-button > button > div > div > span {
+    font-size: 15px !important;
+  }
+}

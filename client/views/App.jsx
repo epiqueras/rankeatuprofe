@@ -96,6 +96,7 @@ export default class App extends Component {
               onTouchTap={goBackFunction}
               tooltip="Regresar"
               touch tooltipPosition="bottom-right"
+              className="back-arrow"
             >
               <ArrowBack />
             </IconButton>

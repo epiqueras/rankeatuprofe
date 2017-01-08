@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
-require('dotenv').config();
 
 if (process.env.NODE_ENV === 'production') {
+  require('dotenv').config();
   process.env.webpackAssets = JSON.stringify(require('./dist/manifest.json'));
   process.env.webpackChunkAssets = JSON.stringify(require('./dist/chunk-manifest.json'));
   require('./dist/server.bundle.js');
