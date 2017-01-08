@@ -42,6 +42,7 @@ const app = new Express();
 const darkServerTheme = darkBaseTheme;
 
 if (process.env.NODE_ENV === 'development') {
+  console.log('Webpack dev server started'); // eslint-disable-line no-console
   const compiler = webpack(webpackDevConfig);
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
