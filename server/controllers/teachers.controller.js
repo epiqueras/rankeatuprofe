@@ -6,7 +6,7 @@ export function getTeacher(req, res, next, local = false) {
     if (err) {
       return local ? res({ error: err }) : res.status(500).json({ error: err });
     } else if (!teacher) {
-      return local ? res({ error: 'error' }) : res.status(500).json({ error: 'error' });
+      return local ? res({ error: 'error' }) : res.status(404).json({ error: 'error' });
     }
     return Reviews.find({ teacherId: teacher._id }).sort('-createdAt').exec((err2, reviews) => {
       if (err2) {

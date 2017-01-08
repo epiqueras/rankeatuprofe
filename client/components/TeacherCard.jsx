@@ -50,9 +50,11 @@ const TeacherCard = ({ teacher }) => {
     }],
   };
   const graph = (<Pie data={data} />);
-  const averageGrade = (data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
+  let averageGrade = (data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
     accumulator + (((currentIndex * 3) + 1) * currentValue)
-  ), 0) / teacher.numberOfReviews).toFixed(2);
+  ), 0) / teacher.numberOfReviews);
+  averageGrade = averageGrade && averageGrade.toFixed(2);
+  const teacherRating = teacher.rating && teacher.rating.toFixed(2);
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -82,7 +84,7 @@ const TeacherCard = ({ teacher }) => {
                 value={teacher.rating}
                 className="card-rating"
               />
-              <h6>Promedio: {teacher.rating.toFixed(2)}</h6>
+              <h6>Promedio: {teacherRating}</h6>
             </div>
             <div className="col-xs-12 hide-in-sm">
               <Divider />

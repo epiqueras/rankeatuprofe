@@ -19,7 +19,7 @@ export function createReview(req, res) {
     if (err) {
       return res.status(500).json({ error: err });
     } else if (!teacher) {
-      return res.status(500).json({ error: 'error' });
+      return res.status(404).json({ error: 'error' });
     }
     const newReview = new Reviews({
       name: sanitizeHtml(req.body.post.name),

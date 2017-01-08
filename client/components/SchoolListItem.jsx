@@ -17,7 +17,7 @@ const SchoolListItem = ({ school }) => (
       <Link onTouchTap={go} key={1} to={`/escuela/${school.slug}`} className="indent-item">
         <ListItem
           key={1}
-          primaryText={'Profesores'}
+          primaryText={'Ver Profesores'}
           leftIcon={<ActionBook />}
         />
       </Link>,

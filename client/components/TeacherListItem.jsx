@@ -9,38 +9,41 @@ import './ListItem.css';
 
 import { go } from '../utils/goBack';
 
-const TeacherListItem = ({ teacher, inSchoolList }) => (
-  <ListItem
-    primaryText={teacher.name}
-    leftIcon={<ActionBook />}
-    primaryTogglesNestedList
-    nestedItems={!inSchoolList ?
-    [
-      <Link onTouchTap={go} key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
-        <ListItem
-          primaryText={`Reviews: ${teacher.rating}/5`}
-          leftIcon={<ActionGrade />}
-        />
-      </Link>,
-      <Link onTouchTap={go} key={2} to={`/escuela/${teacher.schoolSlug}`} className="indent-item">
-        <ListItem
-          primaryText={teacher.school}
-          leftIcon={<SocialSchool />}
-        />
-      </Link>,
-    ]
-    :
-    [
-      <Link onTouchTap={go} key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
-        <ListItem
-          primaryText={`Reviews: ${teacher.rating}/5`}
-          leftIcon={<ActionGrade />}
-        />
-      </Link>,
-    ]
-    }
-  />
-);
+const TeacherListItem = ({ teacher, inSchoolList }) => {
+  const teacherRating = teacher.rating && teacher.rating.toFixed(2);
+  return (
+    <ListItem
+      primaryText={teacher.name}
+      leftIcon={<ActionBook />}
+      primaryTogglesNestedList
+      nestedItems={!inSchoolList ?
+      [
+        <Link onTouchTap={go} key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
+          <ListItem
+            primaryText={`Ver Reviews: ${teacherRating}/5`}
+            leftIcon={<ActionGrade />}
+          />
+        </Link>,
+        <Link onTouchTap={go} key={2} to={`/escuela/${teacher.schoolSlug}`} className="indent-item">
+          <ListItem
+            primaryText={teacher.schoolName}
+            leftIcon={<SocialSchool />}
+          />
+        </Link>,
+      ]
+      :
+      [
+        <Link onTouchTap={go} key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
+          <ListItem
+            primaryText={`Ver Reviews: ${teacherRating}/5`}
+            leftIcon={<ActionGrade />}
+          />
+        </Link>,
+      ]
+      }
+    />
+  );
+};
 
 TeacherListItem.propTypes = {
   teacher: React.PropTypes.object,

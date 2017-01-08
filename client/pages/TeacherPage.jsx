@@ -19,10 +19,17 @@ export default class TeacherPage extends Component {
       teacher: this.context.data.teacher || {},
       reviews: this.context.data.reviews || [],
     };
+    this.fetchTeacher = this.fetchTeacher.bind(this);
   }
 
   componentDidMount() {
     this.fetchTeacher();
+  }
+
+  componentDidUpdate() {
+    if (this.props.params.slug !== this.state.teacher.slug) {
+      this.fetchTeacher();
+    }
   }
 
   fetchTeacher() {

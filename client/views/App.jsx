@@ -10,75 +10,86 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 
-import { goBack } from '../utils/goBack';
+import apiCaller from '../utils/apiCaller';
+import { go, goBack, goBackReview } from '../utils/goBack';
 
 export default class App extends Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
-      suggestions: [
-        {
-          text: 'text-value1',
-          value: (
-            <MenuItem
-              primaryText="profesor pepe"
-              secondaryText={<ActionBook style={{ marginTop: 11 }} />}
-            />
-          ),
-        },
-        {
-          text: 'text-value2',
-          value: (
-            <MenuItem
-              primaryText="colegio bob"
-              secondaryText={<SocialSchool style={{ marginTop: 11 }} />}
-            />
-          ),
-        },
-      ],
-      results: [
-        {
-          id: 1,
-          name: 'Pepe Gonzales',
-          slug: 'pepe-gonzales',
-          rating: 4,
-          school: 'Colegio Rapido',
-          schoolSlug: 'colegio-rapido',
-        },
-        {
-          id: 2,
-          name: 'Colegio Rapido',
-          slug: 'colegio-rapido',
-          rating: 4,
-        },
-      ],
+      suggestions: [],
+      previousSuggestions: [],
+      results: this.context.data.results || [],
     };
     this.search = this.search.bind(this);
+    this.getSuggestions = this.getSuggestions.bind(this);
   }
 
   getChildContext() {
     return { results: this.state.results };
   }
 
-  search(string, index) {
-    if (index === -1) {
-      this.context.router.push({
-        pathname: '/busqueda',
-        query: { buscar: string },
-      });
-    } else {
-      return index;
+  getSuggestions(string) {
+    if (string.length < 20 && string.length % 2 === 0
+      && !this.state.previousSuggestions.includes(string)) {
+      const addedSuggestions = this.state.previousSuggestions;
+      addedSuggestions.push(string);
+      this.setState({ previousSuggestions: addedSuggestions });
+      return apiCaller(`/busqueda/${this.props.params.type}?nombre=${string}`).then(res => (
+        this.setState({ suggestions: res.results })
+      ));
     }
     return null;
   }
 
+  search(string, index) {
+    if (index === -1) {
+      this.context.router.replace({
+        pathname: `/busqueda/${this.props.params.type || 'ambos'}`,
+        query: { nombre: string },
+      });
+      return apiCaller(`/busqueda/${this.props.params.type}?nombre=${string}`).then(res => (
+        this.setState({ results: res.results })
+      ));
+    }
+    const chosenSuggestion = this.state.suggestions[index];
+    go();
+    if (chosenSuggestion.schoolId) {
+      return this.context.router.push(`/profesor/${chosenSuggestion.slug}`);
+    }
+    return this.context.router.push(`/escuela/${chosenSuggestion.slug}`);
+  }
+
   render() {
+    const goBackFunction = this.props.location.pathname.includes('/review') ? goBackReview : goBack;
+    const suggestions = this.state.suggestions.map(suggestion => (
+      suggestion.schoolId ?
+      {
+        text: suggestion.name,
+        value: (
+          <MenuItem
+            primaryText={`${suggestion.name} de ${suggestion.schoolName}`}
+            secondaryText={<ActionBook style={{ marginTop: 11 }} />}
+          />
+        ),
+      }
+      :
+      {
+        text: suggestion.name,
+        value: (
+          <MenuItem
+            primaryText={suggestion.name}
+            secondaryText={<SocialSchool style={{ marginTop: 11 }} />}
+          />
+        ),
+      }
+    ));
     return (
       <div>
         <div className="row middle-xs center-xs">
           <div className="col-xs-1">
             <IconButton
-              onTouchTap={goBack}
+              onTouchTap={goBackFunction}
               tooltip="Regresar"
               touch tooltipPosition="bottom-right"
             >
@@ -90,9 +101,10 @@ export default class App extends Component {
               id="search-bar"
               floatingLabelText="Busca..."
               filter={AutoComplete.fuzzyFilter}
-              dataSource={this.state.suggestions}
+              dataSource={suggestions}
               maxSearchResults={5}
               onNewRequest={this.search}
+              onUpdateInput={this.getSuggestions}
               fullWidth
             />
           </div>
@@ -109,10 +121,13 @@ export default class App extends Component {
 
 App.propTypes = {
   children: React.PropTypes.object,
+  params: React.PropTypes.object,
+  location: React.PropTypes.object,
 };
 
 App.contextTypes = {
   router: React.PropTypes.object,
+  data: React.PropTypes.object,
 };
 
 App.childContextTypes = {

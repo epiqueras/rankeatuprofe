@@ -28,10 +28,17 @@ export default class SchoolPage extends Component {
     this.handleAddFormClose = this.handleAddFormClose.bind(this);
     this.onAddNameChange = this.onAddNameChange.bind(this);
     this.submitAddForm = this.submitAddForm.bind(this);
+    this.fetchSchool = this.fetchSchool.bind(this);
   }
 
   componentDidMount() {
     this.fetchSchool();
+  }
+
+  componentDidUpdate() {
+    if (this.props.params.slug !== this.state.school.slug) {
+      this.fetchSchool();
+    }
   }
 
   onAddNameChange(event, newValue) {

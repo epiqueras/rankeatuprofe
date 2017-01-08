@@ -20,7 +20,7 @@ export default () => (
       <br />
       <div className="row">
         <div className="col-xs-12">
-          <Link onTouchTap={go} to="/busqueda/profesores">
+          <Link onTouchTap={go} to="/busqueda/escuelas">
             <RaisedButton className="search-button" label="Busca Una Escuela" secondary />
           </Link>
         </div>

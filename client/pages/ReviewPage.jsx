@@ -10,11 +10,11 @@ import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import TextField from 'material-ui/TextField';
 
 import apiCaller from '../utils/apiCaller';
-import { madeReview } from '../utils/goBack';
+import { goBackReview } from '../utils/goBack';
 
 export default class TeacherPage extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       rating: null,
       name: '',
@@ -103,7 +103,7 @@ export default class TeacherPage extends Component {
       if (res.error) {
         return null;
       }
-      return madeReview(this.props.params.slug);
+      return goBackReview();
     });
   }
 

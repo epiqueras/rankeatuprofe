@@ -8,7 +8,7 @@ export function getSchool(req, res, next, local = false) {
     if (err) {
       return local ? res({ error: err }) : res.status(500).json({ error: err });
     } else if (!school) {
-      return local ? res({ error: 'error' }) : res.status(500).json({ error: 'error' });
+      return local ? res({ error: 'error' }) : res.status(404).json({ error: 'error' });
     }
     return Teachers.find({ schoolId: school._id }, (err2, teachers) => {
       if (err2) {
@@ -27,7 +27,7 @@ export function addTeacher(req, res) {
     if (err) {
       return res.status(500).json({ error: err });
     } else if (!school) {
-      return res.status(500).json({ error: 'error' });
+      return res.status(404).json({ error: 'error' });
     }
     const newTeacher = new Teachers({ name: sanitizeHtml(req.body.post.name) });
     newTeacher.slug = slug(newTeacher.name.toLowerCase(), { lowercase: true });

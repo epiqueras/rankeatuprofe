@@ -23,6 +23,7 @@ import { match, RouterContext } from 'react-router';
 import serverConfig from './serverConfig';
 
 // Server routes
+import search from './routes/search.routes';
 import schools from './routes/schools.routes';
 import teachers from './routes/teachers.routes';
 import reviews from './routes/reviews.routes';
@@ -78,6 +79,7 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
+app.use('/api', search);
 app.use('/api', schools);
 app.use('/api', teachers);
 app.use('/api', reviews);

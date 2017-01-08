@@ -6,19 +6,23 @@ export const go = (path) => {
   history.push(path);
 };
 
-export const madeReview = (slug) => {
+export const goBack = () => {
   if (history.length) {
+    history.pop();
     browserHistory.goBack();
   } else {
-    browserHistory.replace(`/profesor/${slug}`);
+    browserHistory.push('/');
   }
 };
 
-export const goBack = () => {
+export const goBackReview = () => {
+  const slug = browserHistory.getCurrentLocation().pathname.split('/')[2];
   if (history.length) {
-    browserHistory.goBack();
     history.pop();
+    browserHistory.goBack();
   } else {
-    browserHistory.push('/');
+    browserHistory.replace(`/profesor/${slug}`);
+    browserHistory.push(`/profesor/${slug}/review`);
+    browserHistory.goBack();
   }
 };

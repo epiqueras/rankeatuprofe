@@ -1,6 +1,7 @@
 html, body {
   background: rgb(48, 48, 48);
   font-family: 'Roboto Condensed', sans-serif !important;
+  text-decoration: none !important;
 }
 
 div, label {
