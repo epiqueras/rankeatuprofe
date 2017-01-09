@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'production') {
   process.env.webpackChunkAssets = JSON.stringify(require('./dist/chunk-manifest.json'));
   require('./dist/server.bundle.js');
 } else {
+  require('dotenv').config({ path: './.env.dev' });
   require('babel-register')({
     plugins: [
       [

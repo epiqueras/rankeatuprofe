@@ -16,6 +16,7 @@ const schoolsSchema = new Schema({
   twelveToFourteen: { type: Number, default: 0, required: true, min: 0 },
   fifteenToSeventeen: { type: Number, default: 0, required: true, min: 0 },
   eighteenToTwenty: { type: Number, default: 0, required: true, min: 0 },
+  accepted: { type: Boolean, default: false, required: true },
 });
 
 export default mongoose.model('Schools', schoolsSchema);
