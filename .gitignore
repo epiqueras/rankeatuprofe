@@ -2,4 +2,6 @@ node_modules
 .env
 data
 dist
+scripts/addProdData.js
+scripts/prodData.js
 npm-debug.log
