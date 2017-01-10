@@ -15,7 +15,7 @@ export function search(req, res, next, local = false) {
   const teacherFields = 'name rating slug schoolId schoolSlug schoolName';
 
   if (req.params.type === 'profesores') {
-    return Teachers.find({ name: { $regex: name, $options: 'i' } }).limit(20).select(teacherFields).exec((err, teachers) => {
+    return Teachers.find({ name: { $regex: name, $options: 'i' }, accepted: true }).limit(20).select(teacherFields).exec((err, teachers) => {
       if (err) {
         return local ? res({ error: err }) : res.status(500).json({ error: err });
       }
@@ -29,7 +29,7 @@ export function search(req, res, next, local = false) {
       return local ? res({ results: schools }) : res.json({ results: schools });
     });
   }
-  return Teachers.find({ name: { $regex: name, $options: 'i' } }).limit(20).select(teacherFields).exec((err, teachers) => {
+  return Teachers.find({ name: { $regex: name, $options: 'i' }, accepted: true }).limit(20).select(teacherFields).exec((err, teachers) => {
     if (err) {
       return local ? res({ error: err }) : res.status(500).json({ error: err });
     }

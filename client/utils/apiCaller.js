@@ -5,6 +5,7 @@ export default function apiCaller(endpoint, method = 'get', body) {
   return fetch(`/api${endpoint}`, {
     headers: { 'content-type': 'application/json' },
     method,
+    credentials: 'same-origin',
     body: JSON.stringify(body),
   })
   .then(response => response.json().then(json => ({ json, response })))

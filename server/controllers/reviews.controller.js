@@ -15,7 +15,7 @@ export function createReview(req, res) {
     return res.status(403).json({ error: 'error' });
   }
 
-  return Teachers.findOne({ slug: req.params.slug }, (err, teacher) => {
+  return Teachers.findOne({ slug: req.params.slug, accepted: true }, (err, teacher) => {
     if (err) {
       return res.status(500).json({ error: err });
     } else if (!teacher) {

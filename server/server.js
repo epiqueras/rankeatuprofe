@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import Express from 'express';
 import mongoose from 'mongoose';
+import session from 'express-session';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import path from 'path';
@@ -78,9 +79,22 @@ const reviewLimiter = new RateLimit({
   keyGenerator: req => req.ip + req.params.slug,
 });
 
+const sessConfig = {
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 3600000, httpOnly: true },
+};
+
+if (process.env.NODE_ENV === 'production') {
+  sessConfig.cookie.secure = true;
+}
+
 // Accounts setup
 require('./accounts/config');
+require('./accounts/admins');
 
+app.use(session(sessConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Alert from 'react-s-alert';
 import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 import StarRatingComponent from 'react-star-rating-component';
@@ -103,6 +104,7 @@ export default class TeacherPage extends Component {
       if (res.error) {
         return null;
       }
+      Alert.success('Tu review esta esperando revision.');
       return goBackReview();
     });
   }

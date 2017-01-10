@@ -10,7 +10,7 @@ export function getSchool(req, res, next, local = false) {
     } else if (!school) {
       return local ? res({ error: 'error' }) : res.status(404).json({ error: 'error' });
     }
-    return Teachers.find({ schoolId: school._id }, (err2, teachers) => {
+    return Teachers.find({ schoolId: school._id, accepted: true }, (err2, teachers) => {
       if (err2) {
         return local ? res({ error: err2 }) : res.status(500).json({ error: err2 });
       }

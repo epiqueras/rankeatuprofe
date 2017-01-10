@@ -22,6 +22,7 @@ const reviewsSchema = new Schema({
   grade: { type: String, required: true, enum: gradeArray },
   takesAttendance: { type: Boolean, required: true },
   wouldTakeAgain: { type: Boolean, required: true },
+  accepted: { type: Boolean, default: false, required: true },
 });
 
 export default mongoose.model('Reviews', reviewsSchema);
