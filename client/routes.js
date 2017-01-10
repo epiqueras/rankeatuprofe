@@ -11,6 +11,8 @@ import ResultsPage from './pages/ResultsPage';
 import TeacherPage from './pages/TeacherPage';
 import ReviewPage from './pages/ReviewPage';
 import SchoolPage from './pages/SchoolPage';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminPortalPage from './pages/AdminPortalPage';
 
 injectTapEventPlugin();
 
@@ -24,6 +26,13 @@ export default () => (
       <Route path="/profesor/:slug" component={TeacherPage} />
       <Route path="/profesor/:slug/review" component={ReviewPage} />
       <Route path="/escuela/:slug" component={SchoolPage} />
+    </Route>
+    <Route path="/admin-aiwhdnwoauhcawhuca">
+      <Route path="login" component={AdminLoginPage} />
+      <Route
+        path="portal"
+        component={AdminPortalPage}
+      />
     </Route>
   </Router>
 );

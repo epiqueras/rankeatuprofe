@@ -5,6 +5,7 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import path from 'path';
 import RateLimit from 'express-rate-limit';
+import passport from 'passport';
 
 // Webpack requirements
 import webpack from 'webpack';
@@ -27,6 +28,7 @@ import search from './routes/search.routes';
 import schools from './routes/schools.routes';
 import teachers from './routes/teachers.routes';
 import reviews from './routes/reviews.routes';
+import admin from './routes/admin.routes';
 
 // Webpack dev config
 import webpackDevConfig from '../webpack.config.dev';
@@ -76,6 +78,12 @@ const reviewLimiter = new RateLimit({
   keyGenerator: req => req.ip + req.params.slug,
 });
 
+// Accounts setup
+require('./accounts/config');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
@@ -84,6 +92,7 @@ app.use('/api', search);
 app.use('/api', schools);
 app.use('/api', teachers);
 app.use('/api', reviews);
+app.use('/api', admin);
 app.use('/api', getLimiter);
 app.use('/api/profesor/:slug/review', reviewLimiter);
 
