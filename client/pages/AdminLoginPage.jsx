@@ -73,7 +73,7 @@ export default class AdminLoginPage extends Component {
         <Helmet title="Admin Login" meta={[{ name: 'robots', content: 'noindex' }]} />
         <div className="col-xs-12 login-column">
           <br /><br />
-          <h2 style={{ color: 'white' }}>Welcome Back</h2>
+          <h2 style={{ color: 'white' }}>Login Portal</h2>
           <TextField
             id="username-input"
             type="text"
