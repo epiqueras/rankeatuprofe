@@ -45,13 +45,15 @@ const app = new Express();
 const darkServerTheme = darkBaseTheme;
 
 if (process.env.NODE_ENV === 'development') {
-  console.log('Webpack dev server started'); // eslint-disable-line no-console
+  console.log('Webpack dev server started.'); // eslint-disable-line no-console
   const compiler = webpack(webpackDevConfig);
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: webpackDevConfig.output.publicPath,
   }));
   app.use(webpackHotMiddleware(compiler));
+} else {
+  console.log('No Webpack dev server in production.'); // eslint-disable-line no-console
 }
 
 // MongoDB Connection
@@ -94,7 +96,7 @@ const sessConfig = {
 
 if (process.env.NODE_ENV === 'production') {
   sessConfig.cookie.secure = true;
-  console.log('Production mode!'); // eslint-disable-line no-console
+  console.log('Session configuration set for production.'); // eslint-disable-line no-console
 }
 
 // Accounts setup
