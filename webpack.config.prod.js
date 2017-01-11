@@ -49,6 +49,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
+        'BROWSER': JSON.stringify(true),
         'NODE_ENV': JSON.stringify('production'),
       }
     }),

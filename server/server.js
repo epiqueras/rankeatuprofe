@@ -79,11 +79,17 @@ const reviewLimiter = new RateLimit({
   keyGenerator: req => req.ip + req.params.slug,
 });
 
+const MongoStore = require('connect-mongo')(session);
+
 const sessConfig = {
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 3600000, httpOnly: true },
+  store: new MongoStore({
+    url: process.env.MONGO_URL,
+    autoReconnect: true,
+  }),
 };
 
 if (process.env.NODE_ENV === 'production') {
