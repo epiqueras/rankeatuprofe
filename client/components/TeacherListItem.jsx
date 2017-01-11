@@ -10,7 +10,11 @@ import './ListItem.css';
 import { go } from '../utils/goBack';
 
 const TeacherListItem = ({ teacher, inSchoolList }) => {
-  const teacherRating = teacher.rating && teacher.rating.toFixed(2);
+  const teacherRating = (
+    (teacher.rZero * 0) + (teacher.rOne * 1)
+    + (teacher.rTwo * 2) + (teacher.rThree * 3)
+    + (teacher.rFour * 4) + (teacher.rFive * 5)
+  ) / teacher.numberOfReviews;
   return (
     <ListItem
       primaryText={teacher.name}

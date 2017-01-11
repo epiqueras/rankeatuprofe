@@ -4,6 +4,8 @@ import Teachers from '../models/teachers';
 import Reviews from '../models/reviews';
 import Schools from '../models/schools';
 
+const ratingArray = ['rZero', 'rOne', 'rTwo', 'rThree', 'rFour', 'rFive'];
+
 export function createReview(req, res) {
   const takesAttendanceToF = (req.body.post.takesAttendance === true
     || req.body.post.takesAttendance === false);
@@ -36,10 +38,10 @@ export function createReview(req, res) {
         return res.status(500).json({ error: err2 });
       }
 
-      teacher.rating *= teacher.numberOfReviews;
-      teacher.rating += saved.rating;
+      const roundedRating = Math.round(saved.rating);
+
+      teacher[ratingArray[roundedRating]] += 1;
       teacher.numberOfReviews += 1;
-      teacher.rating /= teacher.numberOfReviews;
       teacher[saved.grade] += 1;
       if (saved.takesAttendance) { teacher.takesAttendance += 1; }
       if (saved.wouldTakeAgain) { teacher.wouldTakeAgain += 1; }
@@ -53,10 +55,8 @@ export function createReview(req, res) {
             return res.status(500).json({ error: err4 });
           }
 
-          school.rating *= school.numberOfReviews;
-          school.rating += saved.rating;
+          school[ratingArray[roundedRating]] += 1;
           school.numberOfReviews += 1;
-          school.rating /= school.numberOfReviews;
           school[saved.grade] += 1;
           if (saved.wouldTakeAgain) { school.wouldTakeAgain += 1; }
 

@@ -54,7 +54,11 @@ const TeacherCard = ({ teacher }) => {
     accumulator + (((currentIndex * 3) + 1) * currentValue)
   ), 0) / teacher.numberOfReviews);
   averageGrade = averageGrade && averageGrade.toFixed(2);
-  const teacherRating = teacher.rating && teacher.rating.toFixed(2);
+  const teacherRating = (
+    (teacher.rZero * 0) + (teacher.rOne * 1)
+    + (teacher.rTwo * 2) + (teacher.rThree * 3)
+    + (teacher.rFour * 4) + (teacher.rFive * 5)
+  ) / teacher.numberOfReviews;
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -81,7 +85,7 @@ const TeacherCard = ({ teacher }) => {
                 name="ranking"
                 editing={false}
                 starCount={5}
-                value={teacher.rating}
+                value={teacherRating}
                 className="card-rating"
               />
               <h6>Promedio: {teacherRating}</h6>
