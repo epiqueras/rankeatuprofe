@@ -40,7 +40,7 @@ const ReviewListItem = ({ review }) => (
             </div>
             <br />
             <div className="row center-xs">
-              <em>Toma Atendencia:</em>
+              <em>Toma Asistencia:</em>
               &nbsp;
               <strong>
                 {review.takesAttendance ?

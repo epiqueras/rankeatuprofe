@@ -10,11 +10,12 @@ import './ListItem.css';
 import { go } from '../utils/goBack';
 
 const TeacherListItem = ({ teacher, inSchoolList }) => {
-  const teacherRating = (
+  let teacherRating = teacher.numberOfReviews && (
     (teacher.rZero * 0) + (teacher.rOne * 1)
     + (teacher.rTwo * 2) + (teacher.rThree * 3)
     + (teacher.rFour * 4) + (teacher.rFive * 5)
   ) / teacher.numberOfReviews;
+  teacherRating = teacherRating && teacherRating.toFixed(2);
   return (
     <ListItem
       primaryText={teacher.name}
@@ -24,7 +25,7 @@ const TeacherListItem = ({ teacher, inSchoolList }) => {
       [
         <Link onTouchTap={go} key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
           <ListItem
-            primaryText={`Ver Reviews: ${teacherRating}/5`}
+            primaryText={teacherRating ? `Ver Reviews: ${teacherRating}/5` : 'Ver Reviews'}
             leftIcon={<ActionGrade />}
           />
         </Link>,
@@ -39,7 +40,7 @@ const TeacherListItem = ({ teacher, inSchoolList }) => {
       [
         <Link onTouchTap={go} key={1} to={`/profesor/${teacher.slug}`} className="indent-item">
           <ListItem
-            primaryText={`Ver Reviews: ${teacherRating}/5`}
+            primaryText={teacherRating ? `Ver Reviews: ${teacherRating}/5` : 'Ver Reviews'}
             leftIcon={<ActionGrade />}
           />
         </Link>,

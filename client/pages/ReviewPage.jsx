@@ -172,7 +172,7 @@ export default class TeacherPage extends Component {
           <div className="row center-xs">
             <div className="col-xs-12">
               <Toggle
-                label="Toma atendencia"
+                label="Toma asistencia"
                 toggled={this.state.takesAttendance}
                 onToggle={this.onTakesAttendanceToggle}
                 style={{ width: 'auto', margin: 'auto' }}

@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+/* eslint-disable no-unneeded-ternary */
 import sanitizeHtml from 'sanitize-html';
 import Teachers from '../models/teachers';
 import Reviews from '../models/reviews';
@@ -29,8 +30,8 @@ export function createReview(req, res) {
       teacherId: teacher._id,
       rating: Number(sanitizeHtml(req.body.post.rating)),
       grade: sanitizeHtml(req.body.post.grade),
-      takesAttendance: Boolean(sanitizeHtml(req.body.post.takesAttendance)),
-      wouldTakeAgain: Boolean(sanitizeHtml(req.body.post.wouldTakeAgain)),
+      takesAttendance: (sanitizeHtml(req.body.post.takesAttendance)) === 'true' ? true : false,
+      wouldTakeAgain: (sanitizeHtml(req.body.post.wouldTakeAgain)) === 'true' ? true : false,
     });
 
     return newReview.save((err2, saved) => {
@@ -53,6 +54,8 @@ export function createReview(req, res) {
         return Schools.findById(teacher.schoolId, (err4, school) => {
           if (err4) {
             return res.status(500).json({ error: err4 });
+          } else if (!school) {
+            return res.status(404).json({ error: 'error' });
           }
 
           school[ratingArray[roundedRating]] += 1;

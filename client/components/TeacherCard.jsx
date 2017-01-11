@@ -50,15 +50,17 @@ const TeacherCard = ({ teacher }) => {
     }],
   };
   const graph = (<Pie data={data} />);
-  let averageGrade = (data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
+  let averageGrade = teacher.numberOfReviews &&
+    (data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
     accumulator + (((currentIndex * 3) + 1) * currentValue)
   ), 0) / teacher.numberOfReviews);
   averageGrade = averageGrade && averageGrade.toFixed(2);
-  const teacherRating = (
+  const teacherRating = teacher.numberOfReviews && (
     (teacher.rZero * 0) + (teacher.rOne * 1)
     + (teacher.rTwo * 2) + (teacher.rThree * 3)
     + (teacher.rFour * 4) + (teacher.rFive * 5)
   ) / teacher.numberOfReviews;
+  const roundedRating = teacherRating && teacherRating.toFixed(2);
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -80,7 +82,7 @@ const TeacherCard = ({ teacher }) => {
               <Divider />
             </div>
             <div className="col-xs-12 col-sm-6 col-md-5">
-              <h3>Reviews totales: {teacher.numberOfReviews}</h3>
+              <h3>Reviews Totales: {teacher.numberOfReviews}</h3>
               <StarRatingComponent
                 name="ranking"
                 editing={false}
@@ -88,15 +90,15 @@ const TeacherCard = ({ teacher }) => {
                 value={teacherRating}
                 className="card-rating"
               />
-              <h6>Promedio: {teacherRating}</h6>
+              <h6>Promedio: {teacher.numberOfReviews ? roundedRating : '?'}</h6>
             </div>
             <div className="col-xs-12 hide-in-sm">
               <Divider />
             </div>
             <div className="col-xs-12 col-sm-6 col-md-5">
-              <h3>Distribucion de notas: {teacher.numberOfReviews}</h3>
+              <h3>Distribucion de Notas</h3>
               {graph}
-              <h6>Promedio: {averageGrade}</h6>
+              <h6>Promedio: {teacher.numberOfReviews ? averageGrade : '?'}</h6>
             </div>
             <div className="col-xs-12">
               <Divider />
@@ -104,7 +106,7 @@ const TeacherCard = ({ teacher }) => {
             <div className="col-xs-12 attendance-and-retake">
               <div className="row center-xs">
                 <div className="col-xs-12 col-sm-3">
-                  <span><strong>Toma atendencia:</strong> {attendanceString}</span>
+                  <span><strong>Toma asistencia:</strong> {attendanceString}</span>
                 </div>
                 <br />
                 <br />

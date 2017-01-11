@@ -10,12 +10,14 @@ export function getSchool(req, res, next, local = false) {
     } else if (!school) {
       return local ? res({ error: 'error' }) : res.status(404).json({ error: 'error' });
     }
-    return Teachers.find({ schoolId: school._id, accepted: true }, (err2, teachers) => {
-      if (err2) {
-        return local ? res({ error: err2 }) : res.status(500).json({ error: err2 });
-      }
-      return local ? res({ school, teachers }) : res.json({ school, teachers });
-    });
+    const teacherFields = 'name rating slug schoolId schoolSlug schoolName rZero rOne rTwo rThree rFour rFive numberOfReviews';
+    return Teachers.find({ schoolId: school._id, accepted: true }).select(teacherFields)
+      .exec((err2, teachers) => {
+        if (err2) {
+          return local ? res({ error: err2 }) : res.status(500).json({ error: err2 });
+        }
+        return local ? res({ school, teachers }) : res.json({ school, teachers });
+      });
   });
 }
 

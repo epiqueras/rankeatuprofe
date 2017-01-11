@@ -45,15 +45,17 @@ const SchoolCard = ({ school }) => {
     }],
   };
   const graph = (<Pie data={data} />);
-  let averageGrade = (data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
+  let averageGrade = school.numberOfReviews &&
+    (data.datasets[0].data.reduce((accumulator, currentValue, currentIndex) => (
     accumulator + (((currentIndex * 3) + 1) * currentValue)
   ), 0) / school.numberOfReviews);
   averageGrade = averageGrade && averageGrade.toFixed(2);
-  const schoolRating = (
+  const schoolRating = school.numberOfReviews && (
     (school.rZero * 0) + (school.rOne * 1)
     + (school.rTwo * 2) + (school.rThree * 3)
     + (school.rFour * 4) + (school.rFive * 5)
   ) / school.numberOfReviews;
+  const roundedRating = schoolRating && schoolRating.toFixed(2);
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -66,7 +68,7 @@ const SchoolCard = ({ school }) => {
               <Divider />
             </div>
             <div className="col-xs-12 col-sm-6 col-md-5">
-              <h3>Reviews totales: {school.numberOfReviews}</h3>
+              <h3>Reviews Totales: {school.numberOfReviews}</h3>
               <StarRatingComponent
                 name="ranking"
                 editing={false}
@@ -74,15 +76,15 @@ const SchoolCard = ({ school }) => {
                 value={schoolRating}
                 className="card-rating"
               />
-              <h6>Promedio: {schoolRating}</h6>
+              <h6>Promedio: {school.numberOfReviews ? roundedRating : '?'}</h6>
             </div>
             <div className="col-xs-12 hide-in-sm">
               <Divider />
             </div>
             <div className="col-xs-12 col-sm-6 col-md-5">
-              <h3>Distribucion de notas: {school.numberOfReviews}</h3>
+              <h3>Distribucion de Notas</h3>
               {graph}
-              <h6>Promedio: {averageGrade}</h6>
+              <h6>Promedio: {school.numberOfReviews ? averageGrade : '?'}</h6>
             </div>
             <div className="col-xs-12">
               <Divider />

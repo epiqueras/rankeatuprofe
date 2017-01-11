@@ -11,9 +11,8 @@ const ResultsPage = ({}, context) => { // eslint-disable-line no-empty-pattern
   const resultsList = context.results.map((result) => {
     if (result.schoolId) {
       return <TeacherListItem key={result._id} teacher={result} />;
-    } else { // eslint-disable-line no-else-return
-      return <SchoolListItem key={result._id} school={result} />;
     }
+    return <SchoolListItem key={result._id} school={result} />;
   });
   return (
     <div>

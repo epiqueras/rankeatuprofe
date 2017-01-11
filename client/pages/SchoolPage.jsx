@@ -76,10 +76,7 @@ export default class SchoolPage extends Component {
         return null;
       }
       this.setState({ addFormOpen: false });
-      const newTeachers = this.state.teachers;
-      newTeachers.unshift(res.teacher);
-      Alert.success('El profesor que agregaste esta esperando revision.');
-      return this.setState({ teachers: newTeachers });
+      return Alert.success('El profesor que agregaste esta esperando revision.');
     });
   }
 

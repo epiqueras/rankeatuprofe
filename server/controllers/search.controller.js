@@ -12,7 +12,7 @@ export function search(req, res, next, local = false) {
   }
 
   const schoolFields = 'name slug';
-  const teacherFields = 'name rating slug schoolId schoolSlug schoolName';
+  const teacherFields = 'name rating slug schoolId schoolSlug schoolName rZero rOne rTwo rThree rFour rFive numberOfReviews';
 
   if (req.params.type === 'profesores') {
     return Teachers.find({ name: { $regex: name, $options: 'i' }, accepted: true }).limit(20).select(teacherFields).exec((err, teachers) => {
