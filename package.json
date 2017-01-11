@@ -12,7 +12,8 @@
     "bs": "npm run build:both && npm run start:prod",
     "clean": "rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-data:clean": "node scripts/cleanDevData.js"
+    "dev-data:clean": "node scripts/cleanDevData.js",
+    "heroku-postbuild": "node scripts/postinstall.js && npm run bs"
   },
   "repository": {
     "type": "git",

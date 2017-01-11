@@ -94,6 +94,7 @@ const sessConfig = {
 
 if (process.env.NODE_ENV === 'production') {
   sessConfig.cookie.secure = true;
+  console.log('Production mode!'); // eslint-disable-line no-console
 }
 
 // Accounts setup
