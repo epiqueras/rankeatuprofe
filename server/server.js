@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import Express from 'express';
+import enforce from 'express-sslify';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import compression from 'compression';
@@ -97,6 +98,10 @@ const sessConfig = {
 if (process.env.NODE_ENV === 'production') {
   sessConfig.cookie.secure = true;
   console.log('Session configuration set for production.'); // eslint-disable-line no-console
+}
+if (process.env.NODE_ENV === 'production' && process.env.IS_HEROKU) {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+  console.log('Enforcing https.'); // eslint-disable-line no-console
 }
 
 // Accounts setup
