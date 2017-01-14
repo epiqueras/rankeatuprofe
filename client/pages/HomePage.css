@@ -1,5 +1,11 @@
 .home-page-container {
-  height: 100vh;
+  margin-top: 10%;
+}
+
+.info-container {
+  text-align: left;
+  color: grey;
+  line-height: 1.5;
 }
 
 .search-button {
@@ -24,6 +30,9 @@
 @media (max-width: 490px) {
   .search-button > button > div > div > span {
     font-size: 20px !important;
+  }
+  .info-container {
+    font-size: 10px;
   }
 }
 
