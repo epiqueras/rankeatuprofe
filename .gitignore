@@ -1,9 +1,9 @@
-node_modules
-.env
-.env.dev
-data
-dist
-scripts/addProdData.js
-scripts/prodData.js
+/node_modules/
+/.env
+/.env.dev
+/data/
+/dist/
+/scripts/addProdData.js
+/scripts/prodData.js
 letsencryptkeys
-npm-debug.log
+/npm-debug.log
